@@ -65,8 +65,7 @@ RUN set -x \
     && npm install -g pnpm \
     && pnpm setup \
     && source ~/.bashrc \
-    && pnpm install -g pm2 \
-    && pnpm install -g ts-node typescript tslib \
+    && pnpm add -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
     && pnpm install --prod \
     && rm -rf /root/.pnpm-store \
