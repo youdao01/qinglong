@@ -62,7 +62,7 @@ RUN set -x \
     && cp -f .env.example .env \
     && chmod 777 ${QL_DIR}/shell/*.sh \
     && chmod 777 ${QL_DIR}/docker/*.sh \
-    && npm install -g pnpm \
+    && pnpm setup \
     && source ~/.bashrc \
     && pnpm install -g pm2 \
     && pnpm install -g ts-node typescript tslib \
