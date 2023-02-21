@@ -15,7 +15,8 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
 WORKDIR ${QL_DIR}
 RUN set -x \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && npm config set registry http://mirrors.cloud.tencent.com/npm \
+    #如果使用的是GITHUB ACTIONS编译可将其注释
+    #&& npm config set registry http://mirrors.cloud.tencent.com/npm \
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
