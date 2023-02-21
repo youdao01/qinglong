@@ -78,7 +78,7 @@
     "@umijs/test": "^3.3.9",
     "antd": "^4.17.0-alpha.6",
     "codemirror": "^5.62.2",
-    "compression-webpack-plugin": "6.1.1",
+    "compression-webpack-plugin": "1.1.12",
     "darkreader": "^4.9.27",
     "lint-staged": "^10.0.7",
     "nodemon": "^2.0.4",
