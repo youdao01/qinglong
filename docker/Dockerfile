@@ -55,7 +55,7 @@ RUN set -x \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && touch ~/.bashrc \
-    && git clone -b ${QL_VERSION} ${QL_URL} ${QL_DIR} \
+    && git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
     && git config --global user.email "qinglong@@users.noreply.github.com" \
     && git config --global user.name "qinglong" \
     && cd ${QL_DIR} \
