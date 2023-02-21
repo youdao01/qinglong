@@ -63,12 +63,13 @@ RUN set -x \
     && chmod 777 ${QL_DIR}/shell/*.sh \
     && chmod 777 ${QL_DIR}/docker/*.sh \
     && npm install -g pnpm \
+    && npm install -g umi \
     && pnpm setup \
-    && pnpm install \
     && source ~/.bashrc \
     && pnpm add -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
     && pnpm install --prod \
+    && pnpm install \
     && rm -rf /root/.pnpm-store \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
