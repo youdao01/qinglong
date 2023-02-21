@@ -65,6 +65,7 @@ RUN set -x \
     && npm install -g pnpm \
     && pnpm setup \
     && npm install -g umi \
+    && npm install --save-dev compression-webpack-plugin@1.1.12 \
     && source ~/.bashrc \
     && pnpm add -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
