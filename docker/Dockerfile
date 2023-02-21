@@ -64,7 +64,8 @@ RUN set -x \
     && chmod 777 ${QL_DIR}/docker/*.sh \
     && npm install -g pnpm \
     && pnpm setup \
-    && npm install webpack umi -g \
+    && npm install -g compression-webpack-plugin \
+    && npm install -g umi \
     && source ~/.bashrc \
     && pnpm add -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
