@@ -6,8 +6,8 @@ RUN set -x \
     && apk update \
     && apk add nodejs npm git \
     && npm i -g pnpm \
-    && npm i -g umi \
     && cd /tmp/build \
+    && npm install -g umi \
     && pnpm install --prod
 
 FROM node:14.6-alpine
