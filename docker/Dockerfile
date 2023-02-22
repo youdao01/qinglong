@@ -1,7 +1,5 @@
 FROM whyour/qinglong:2.10.8
 
-rm -rf /ql
-
 ARG QL_MAINTAINER="whyour"
 LABEL maintainer="${QL_MAINTAINER}"
 ARG QL_URL=https://github.com/${QL_MAINTAINER}/qinglong.git
