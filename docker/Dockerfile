@@ -42,6 +42,8 @@ RUN set -x \
                              php7-intl \
                              php7-session \
     && rm -rf /var/cache/apk/* \
+    && rm -rf ${QL_DIR}/.umirc.ts \
+    && cp -rf /.umirc.ts ${QL_DIR}/.umirc.ts \
     && cd ${QL_DIR} \
     && rm -rf /static \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
