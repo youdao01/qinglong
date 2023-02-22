@@ -4,7 +4,7 @@ COPY package.json /tmp/build/
 
 RUN set -x \
     && apk update \
-    && apk add nodejs npm git \
+    && npm i -g umi \
     && npm i -g pnpm \
     && cd /tmp/build \
     && pnpm install --prod
@@ -69,7 +69,6 @@ RUN set -x \
     && rm -rf /var/cache/apk/* \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && touch ~/.bashrc \
     && git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
     && git config --global user.email "qinglong@@users.noreply.github.com" \
     && git config --global user.name "qinglong" \
@@ -78,11 +77,8 @@ RUN set -x \
     && chmod 777 ${QL_DIR}/shell/*.sh \
     && chmod 777 ${QL_DIR}/docker/*.sh \
     && npm install -g pnpm \
-    && pnpm setup \
-    && source ~/.bashrc \
     && pnpm add -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
-    && pnpm install --prod \
     && rm -rf /root/.pnpm-store \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
