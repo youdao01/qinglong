@@ -1,4 +1,4 @@
-FROM node:14.6-alpine as builder
+FROM node:16.13.0-alpine as builder
 
 COPY package.json /tmp/build/
 
@@ -7,10 +7,9 @@ RUN set -x \
     && apk add nodejs npm git \
     && npm i -g pnpm \
     && cd /tmp/build \
-    && npm i -g umi \
     && pnpm install --prod
 
-FROM node:14.6-alpine
+FROM node:16.13.0-alpine
 
 ARG QL_MAINTAINER="youdao01"
 LABEL maintainer="${QL_MAINTAINER}"
