@@ -39,7 +39,9 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+
       packages: write
+
       contents: read
 
     steps:
@@ -68,7 +70,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./docker/Dockerfile
