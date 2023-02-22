@@ -1,6 +1,8 @@
 FROM whyour/qinglong:2.10.8
 
-ARG QL_MAINTAINER="youdao01"
+rm -rf /ql
+
+ARG QL_MAINTAINER="whyour"
 LABEL maintainer="${QL_MAINTAINER}"
 ARG QL_URL=https://github.com/${QL_MAINTAINER}/qinglong.git
 ARG QL_BRANCH=master
@@ -42,11 +44,9 @@ RUN set -x \
                              php7-intl \
                              php7-session \
     && rm -rf /var/cache/apk/* \
-    && rm -rf ${QL_DIR}/.umirc.ts \
-    && cp -rf /.umirc.ts ${QL_DIR}/.umirc.ts \
     && cd ${QL_DIR} \
-    && rm -rf /static \
-    && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
+    && rm -rf static \
+    && git clone -b ${QL_BRANCH} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
     && rm -rf /static
     
