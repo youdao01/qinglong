@@ -4,8 +4,9 @@ COPY package.json /tmp/build/
 
 RUN set -x \
     && apk update \
-    && npm i -g umi \
+    && apk add nodejs npm git \
     && npm i -g pnpm \
+    && npm i -g umi \
     && cd /tmp/build \
     && pnpm install --prod
 
