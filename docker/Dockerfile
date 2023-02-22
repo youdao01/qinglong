@@ -1,9 +1,22 @@
+FROM node:14.6-alpine as builder
+
+COPY package.json /tmp/build/
+
+RUN set -x \
+    && apk update \
+    && apk add nodejs npm git \
+    && npm i -g pnpm \
+    && cd /tmp/build \
+    && pnpm install --prod
+
 FROM node:14.6-alpine
+
 ARG QL_MAINTAINER="youdao01"
 LABEL maintainer="${QL_MAINTAINER}"
 ARG QL_URL=https://github.com/${QL_MAINTAINER}/qinglong.git
 ARG QL_BRANCH=master
 ARG QL_VERSION=v2.10.8
+
 ENV PNPM_HOME=/root/.local/share/pnpm \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.local/share/pnpm:/root/.local/share/pnpm/global/5/node_modules:$PNPM_HOME \
     NODE_PATH=/usr/local/bin:/usr/local/pnpm-global/5/node_modules:/usr/local/lib/node_modules:/root/.local/share/pnpm/global/5/node_modules \
@@ -14,7 +27,7 @@ ENV PNPM_HOME=/root/.local/share/pnpm \
     QL_MAINTAINER=${QL_MAINTAINER} \
     QL_URL=${QL_URL} \
     QL_BRANCH=${QL_BRANCH}
-WORKDIR ${QL_DIR}
+
 RUN set -x \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && npm config set registry http://mirrors.cloud.tencent.com/npm \
@@ -74,4 +87,9 @@ RUN set -x \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
     && rm -rf /static
+
+COPY --from=builder /tmp/build/node_modules/. /ql/node_modules/
+
+WORKDIR ${QL_DIR}
+
 ENTRYPOINT ["./docker/docker-entrypoint.sh"]
