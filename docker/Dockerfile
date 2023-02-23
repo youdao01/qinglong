@@ -3,8 +3,9 @@ COPY package.json /tmp/build/
 RUN set -x \
     && apk update \
     && apk add nodejs npm git \
-    && npm i -g pnpm \
     && cd /tmp/build \
+    && npm install -g pnpm \
+    && npm install -g umi \
     && pnpm install --prod
 
 FROM node:14.6-alpine
@@ -70,6 +71,7 @@ RUN set -x \
     && git config --global user.name "qinglong" \
     && git config --global http.postBuffer 524288000 \
     && npm install -g pnpm \
+    && npm install -g umi \
     && pnpm add -g pm2 ts-node typescript tslib \
     && rm -rf /root/.pnpm-store \
     && rm -rf /root/.local/share/pnpm/store \
