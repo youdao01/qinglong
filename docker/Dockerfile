@@ -1,9 +1,10 @@
 FROM node:14.6-alpine as builder
 COPY package.json /tmp/build/
-RUN set -x; cd /tmp/build \
+RUN set -x \
     && apk update \
     && apk add nodejs npm git \
     && npm i -g pnpm \
+    && cd /tmp/build \
     && pnpm install --prod
 
 FROM node:14.6-alpine
