@@ -60,22 +60,23 @@ RUN set -x \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && touch ~/.bashrc \
-    && git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
     && git config --global user.email "qinglong@@users.noreply.github.com" \
     && git config --global user.name "qinglong" \
+    && npm install -g pnpm \ 
+    && pnpm setup \ 
+    && source ~/.bashrc \
+    && pnpm add -g pm2 ts-node typescript tslib \
+    && git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
     && cd ${QL_DIR} \
     && cp -f .env.example .env \
     && chmod 777 ${QL_DIR}/shell/*.sh \
     && chmod 777 ${QL_DIR}/docker/*.sh \
-    && npm install -g pnpm \ 
-    && pnpm setup \ 
-    && source ~/.bashrc \ 
     && pnpm install --prod \
-    && pnpm add -g pm2 ts-node typescript tslib \
-    && rm -rf /root/.npm \
-    
     && rm -rf /root/.pnpm-store \
+    && rm -rf /root/.cache \
+    && rm -rf /root/.npm \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
-    && cp -rf /static/* ${QL_DIR} \
+    && mkdir -p ${QL_DIR}/static \
+    && cp -rf /static/* ${QL_DIR}/static \
     && rm -rf /static
 ENTRYPOINT ["./docker/docker-entrypoint.sh"]
