@@ -13,7 +13,7 @@ echo
 
 echo -e "======================2. 安装依赖========================\n"
 
-npm_install
+pnpm_install
 update_depend
 
 echo

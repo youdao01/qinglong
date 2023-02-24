@@ -212,7 +212,7 @@ fix_config() {
     fi
 }
 
-npm_install(){
+pnpm_install(){
 
 local dir_work=$dir_root
 
