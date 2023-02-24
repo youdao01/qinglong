@@ -15,7 +15,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
 WORKDIR ${QL_DIR}
 RUN set -x \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && npm config set registry http://mirrors.cloud.tencent.com/npm \
     && apk update -f \
     && apk upgrade \
     && apk --no-cache add -f bash \
@@ -55,7 +54,7 @@ RUN set -x \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && touch ~/.bashrc \
-    && git clone -b ${QL_VERSION} ${QL_URL} ${QL_DIR} \
+    && git clone -b ${QL_BRANCH} ${QL_URL} ${QL_DIR} \
     && git config --global user.email "qinglong@@users.noreply.github.com" \
     && git config --global user.name "qinglong" \
     && cd ${QL_DIR} \
@@ -63,10 +62,11 @@ RUN set -x \
     && chmod 777 ${QL_DIR}/shell/*.sh \
     && chmod 777 ${QL_DIR}/docker/*.sh \
     && npm install -g pnpm \
-    && pnpm install -g pm2 \
-    && pnpm install -g ts-node typescript tslib \
+    && pnpm setup \
+    && source ~/.bashrc \
+    && pnpm install -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
-    && pnpm install --prod \
+    #&& pnpm install --prod \
     && rm -rf /root/.pnpm-store \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
