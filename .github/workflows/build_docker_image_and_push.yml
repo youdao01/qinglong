@@ -35,7 +35,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-            node:14.6
+          node: "14.6"
 
       - name: Set time zone
         uses: szenius/set-timezone@v1.0
