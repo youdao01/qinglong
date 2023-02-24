@@ -68,7 +68,7 @@ RUN set -x \
     && rm -rf /root/.npm \
     #&& pnpm install --prod \
     && rm -rf /root/.pnpm-store \
-    && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
+    && git clone -b ${QL_BRANCH} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
     && rm -rf /static
 ENTRYPOINT ["./docker/docker-entrypoint.sh"]
