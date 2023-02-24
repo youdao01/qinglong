@@ -66,7 +66,7 @@ RUN set -x \
     && source ~/.bashrc \
     && pnpm install -g pm2 ts-node typescript tslib \
     && rm -rf /root/.npm \
-    #&& pnpm install --prod \
+    && pnpm install --prod \
     && rm -rf /root/.pnpm-store \
     && git clone -b ${QL_VERSION} https://github.com/${QL_MAINTAINER}/qinglong-static.git /static \
     && cp -rf /static/* ${QL_DIR} \
