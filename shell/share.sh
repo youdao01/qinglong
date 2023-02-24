@@ -212,6 +212,20 @@ fix_config() {
     fi
 }
 
+npm_install(){
+
+local dir_work=$dir_root
+
+cd $dir_work
+
+echo -e "运行安装 pnpm install...\n"
+
+pnpm install --prod
+
+[[ $? -ne 0 ]] && echo -e "\nnpm install 运行不成功，请进入 $dir_work 目录后手动运行 pnpm install...\n"
+
+}
+
 npm_install_sub() {
     if [ $is_termux -eq 1 ]; then
         npm install --production --no-bin-links --registry=https://registry.npm.taobao.org || npm install --production --no-bin-links
