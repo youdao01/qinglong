@@ -18,20 +18,6 @@ on:
 
 jobs:
 
-  build-static:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '14.6'
-
-      - name: build front and back
-        run: |
-          yarn install
-          yarn build
-          yarn build-back
-
   build-push:
 
     needs: build-static
@@ -48,8 +34,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          node-version: '14.6'
 
       - name: Set time zone
         uses: szenius/set-timezone@v1.0
