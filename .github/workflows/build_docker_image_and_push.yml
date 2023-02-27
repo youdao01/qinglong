@@ -34,8 +34,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          node: "14.6"
 
       - name: Set time zone
         uses: szenius/set-timezone@v1.0
@@ -61,7 +59,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./ql
           file: ./docker/Dockerfile
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
